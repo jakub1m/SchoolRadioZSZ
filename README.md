@@ -37,4 +37,4 @@ For any questions or feedback, please reach out to us at [jakub1michalski@gmail.
 
 ---
 
-Thank you for exploring **SchoolRadioPro**! We hope you find it useful and look forward to your contributions. 🎉
+Thank you for exploring **SchoolRadioZSZ**! We hope you find it useful and look forward to your contributions. 🎉
