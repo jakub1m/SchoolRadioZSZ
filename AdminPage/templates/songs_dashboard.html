@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>SONGS PANEL</h1>
+        <div id="songsList">
+            {% for song in songs_data %}
+            <div class="song">
+                <h2>{{ song.title }}</h2>
+                <a href="{{ song.url }}">{{ song.url }}</a>
+                <div class="buttons">
+                    <button class="accept-btn" onclick="accept('{{ song.id }}')">Accept</button>
+                    <button class="refuse-btn" onclick="refuse('{{ song.id }}')">Refuse</button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        function accept(id) {
+            console.log("Accept: " + id);
+            sendRequest("/acceptsong/" + id); // Wysłanie żądania na /acceptsong/id
+        }
+
+        function refuse(id) {
+            console.log("Refuse: " + id);
+            sendRequest("/refusesong/" + id); // Wysłanie żądania na /refusesong/id
+        }
+
+        function sendRequest(url) {
+            fetch(url, {
+                method: 'POST', // Ustawienie metody na POST
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({}) // Wysłanie pustego ciała żądania
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Response:', data);
+                // Tutaj możesz dodać obsługę odpowiedzi z serwera
+            })
+            .catch(error => {
+                console.error('There was a problem with your fetch operation:', error);
+            });
+        }
+    </script>
+</body>
+</html>

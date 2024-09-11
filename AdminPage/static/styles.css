@@ -1,0 +1,422 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1f1f1f;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+    position: relative; /* Dodajemy position: relative dla kontenerów napisów */
+}
+
+h1 {
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+.logout-btn {
+    position: absolute; /* Ustawiamy position: absolute dla przycisków */
+    top: 10px;
+    right: 10px;
+    background-color: #3e3e3e;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logout-btn:hover {
+    background-color: #585858;
+}
+
+.button-container {
+    margin-top: 50px;
+    position: relative; /* Dodajemy position: relative dla kontenerów napisów */
+}
+
+button {
+    background-color: #3e3e3e;
+    color: #fff;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background-color: #585858;
+}
+
+
+.container {
+    text-align: center;
+}
+
+h1 {
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+input[type="password"] {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+button {
+    background-color: #3e3e3e;
+    color: #fff;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background-color: #585858;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1f1f1f;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+    position: relative; /* Dodajemy position: relative dla kontenerów napisów */
+}
+
+h1 {
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+.logout-btn {
+    position: absolute; /* Ustawiamy position: absolute dla przycisków */
+    top: 10px;
+    right: 10px;
+    background-color: #3e3e3e;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logout-btn:hover {
+    background-color: #585858;
+}
+
+.button-container {
+    margin-top: 50px;
+    position: relative; /* Dodajemy position: relative dla kontenerów napisów */
+}
+
+button {
+    background-color: #3e3e3e;
+    color: #fff;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background-color: #585858;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1f1f1f;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+    position: relative;
+}
+
+h1 {
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+.logout-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #3e3e3e;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logout-btn:hover {
+    background-color: #585858;
+}
+.logs-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #3e3e3e;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logs-btn:hover {
+    background-color: #585858;
+}
+.button-container {
+    margin-top: 50px;
+}
+
+button {
+    background-color: #3e3e3e;
+    color: #fff;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background-color: #585858;
+}
+
+.song-title {
+    color: #fff;
+}
+
+.song-url {
+    color: #fff;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.song-url:hover {
+    color: #ccc;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1f1f1f;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+    position: relative;
+}
+
+h1 {
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+.logout-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #3e3e3e;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logout-btn:hover {
+    background-color: #585858;
+}
+
+.button-container {
+    margin-top: 50px;
+}
+
+button {
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button.accept-btn {
+    background-color: #2ecc71; /* Zielony kolor dla przycisku Accept */
+    color: #fff;
+}
+
+button.accept-btn:hover {
+    background-color: #27ae60; /* Ciemniejszy odcień zielonego po najechaniu */
+}
+
+button.refuse-btn {
+    background-color: #e74c3c; /* Czerwony kolor dla przycisku Refuse */
+    color: #fff;
+}
+
+button.refuse-btn:hover {
+    background-color: #c0392b; /* Ciemniejszy odcień czerwonego po najechaniu */
+}
+
+.song-title {
+    color: #fff;
+}
+
+.song-url {
+    color: #fff;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.song-url:hover {
+    color: #ccc;
+}
+
+/* Container for logs */
+#log-container {
+    width: 90%;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    height: 70vh;
+    overflow-y: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: monospace;
+    line-height: 1.5;
+}
+
+/* Log entries */
+.log-entry {
+    margin-bottom: 5px;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+/* Log entry types */
+.log-entry.info {
+    background-color: #e7f4e4;
+    border-left: 4px solid #2e7d32;
+}
+
+.log-entry.warning {
+    background-color: #fff4e5;
+    border-left: 4px solid #ff9800;
+}
+
+.log-entry.error {
+    background-color: #ffebee;
+    border-left: 4px solid #d32f2f;
+}
+
+.log-entry.default {
+    background-color: #e0e0e0;
+    border-left: 4px solid #757575;
+}
+
+/* Scrollbar styling for the log container */
+#log-container::-webkit-scrollbar {
+    width: 10px;
+}
+
+#log-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+#log-container::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+#log-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

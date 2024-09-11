@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logs</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <a href="#" class="logout-btn" onclick="logout()">Wyloguj</a> <!-- Przycisk wylogowania -->
+
+    <div id="log-container"></div>
+    <script>
+        function fetchLogs() {
+            $.get('/get_logs', function(data) {
+                let logHtml = '';
+                data.logs.forEach(log => {
+                    const logType = log.includes('WARNING') ? 'warning' :
+                                    log.includes('ERROR') ? 'error' :
+                                    log.includes('INFO') ? 'info' : 'default';
+                    logHtml += `<div class="log-entry ${logType}">${log}</div>`;
+                });
+                $('#log-container').html(logHtml);
+                $('#log-container').scrollTop($('#log-container')[0].scrollHeight);
+            });
+        }
+
+        $(document).ready(function() {
+            fetchLogs();
+            setInterval(fetchLogs, 5000); // Refresh logs every 5 seconds
+        });
+
+        function logout() {
+            fetch('/logs/logout')
+            .then(response => {
+                if (response.redirected) {
+                    window.location.href = response.url; // Przekieruj na stronę logowania
+                }
+            });
+        }
+    </script>
+</body>
+</html>

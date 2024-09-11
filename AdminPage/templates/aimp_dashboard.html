@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Panel Sterowania AIMP</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Panel Sterowania AIMP</h1>
+        <button onclick="updateValue('Play')">Play</button>
+        <button onclick="updateValue('Pause')">Pause</button>
+        <button onclick="updateValue('Skip')">Skip</button>
+    </div>
+
+    <a href="#" class="logout-btn" onclick="logout()">Wyloguj</a> <!-- Przycisk wylogowania -->
+
+    <script>
+        function updateValue(value) {
+            fetch('/aimp/update', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ button: value })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Wystąpił błąd podczas aktualizacji wartości ToDo');
+                }
+            })
+            .catch(error => {
+                console.error('Błąd:', error);
+            });
+        }
+
+        function logout() {
+            fetch('/aimp/logout')
+            .then(response => {
+                if (response.redirected) {
+                    window.location.href = response.url; // Przekieruj na stronę logowania
+                }
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Co chcesz zrobić?</h1>
+        <form action="/login" method="post">
+            <button type="submit" name="option" value="Aimp">Steruj Aimpem</button>
+            <button type="submit" name="option" value="Songs">Akceptuj piosenki</button>
+            <button type="submit" name="option" value="Logs">Logs</button>
+        </form>
+    </div>
+</body>
+</html>

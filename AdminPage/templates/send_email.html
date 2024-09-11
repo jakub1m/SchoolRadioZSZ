@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Email</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <button id="sendEmailButton">Wyślij email</button>
+
+    <script>
+        // Pobierz URL z Flask
+        const emailApiUrl = "{{ email_api_url }}";
+
+        // Funkcja do obsługi kliknięcia przycisku
+        document.getElementById("sendEmailButton").addEventListener("click", function() {
+            // Wyślij zapytanie POST do zewnętrznego serwera
+            fetch(emailApiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                // W przypadku braku potrzeby przesyłania danych, poniżej można pozostawić pusty obiekt {}
+                body: JSON.stringify({})
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to send email');
+                }
+                // Po pomyślnym wysłaniu emaila, przekieruj użytkownika na /songs/login
+                window.location.href = '/songs/login'; 
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to send email. Please try again later.');
+                // W przypadku niepowodzenia zapytania, przekieruj użytkownika na /songs/login
+                window.location.href = '/songs'; 
+            });
+        });
+    </script>
+</body>
+</html>
