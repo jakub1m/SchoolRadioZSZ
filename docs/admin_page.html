@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Page &mdash; SchoolRadioZSZ  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Koyeb API" href="koyeb_api.html" />
+    <link rel="prev" title="Welcome to Your Project’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            SchoolRadioZSZ
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Admin Page</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#admin_page.accept_song"><code class="docutils literal notranslate"><span class="pre">accept_song()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#admin_page.aimp_dashboard"><code class="docutils literal notranslate"><span class="pre">aimp_dashboard()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#admin_page.get_logs"><code class="docutils literal notranslate"><span class="pre">get_logs()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#admin_page.get_x"><code class="docutils literal notranslate"><span class="pre">get_x()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#admin_page.index"><code class="docutils literal notranslate"><span class="pre">index()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#admin_page.login"><code class="docutils literal notranslate"><span class="pre">login()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#admin_page.login_aimp"><code class="docutils literal notranslate"><span class="pre">login_aimp()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#admin_page.login_logs"><code class="docutils literal notranslate"><span class="pre">login_logs()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#admin_page.login_songs"><code class="docutils literal notranslate"><span class="pre">login_songs()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#admin_page.logout_aimp"><code class="docutils literal notranslate"><span class="pre">logout_aimp()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#admin_page.logout_logs"><code class="docutils literal notranslate"><span class="pre">logout_logs()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#admin_page.logs_dashboard"><code class="docutils literal notranslate"><span class="pre">logs_dashboard()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#admin_page.refuse_song"><code class="docutils literal notranslate"><span class="pre">refuse_song()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#admin_page.send_mail"><code class="docutils literal notranslate"><span class="pre">send_mail()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#admin_page.songs_dashboard"><code class="docutils literal notranslate"><span class="pre">songs_dashboard()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#admin_page.update"><code class="docutils literal notranslate"><span class="pre">update()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#admin_page.verify"><code class="docutils literal notranslate"><span class="pre">verify()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="koyeb_api.html">Koyeb API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sentiment_analysis.html">Sentiment Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Modules</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">SchoolRadioZSZ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Admin Page</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/admin_page.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-admin_page">
+<span id="admin-page"></span><h1>Admin Page<a class="headerlink" href="#module-admin_page" title="Link to this heading"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="admin_page.accept_song">
+<span class="sig-prename descclassname"><span class="pre">admin_page.</span></span><span class="sig-name descname"><span class="pre">accept_song</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">song_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/admin_page.html#accept_song"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#admin_page.accept_song" title="Link to this definition"></a></dt>
+<dd><p>Handle the acceptance of a song.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>song_id</strong> (<em>str</em>) – The ID of the song to accept.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A JSON response indicating the success or failure of the acceptance.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>flask.Response</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="admin_page.aimp_dashboard">
+<span class="sig-prename descclassname"><span class="pre">admin_page.</span></span><span class="sig-name descname"><span class="pre">aimp_dashboard</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/admin_page.html#aimp_dashboard"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#admin_page.aimp_dashboard" title="Link to this definition"></a></dt>
+<dd><p>Display the AIMP dashboard.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The rendered HTML template for the AIMP dashboard or a redirect to the index page.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="admin_page.get_logs">
+<span class="sig-prename descclassname"><span class="pre">admin_page.</span></span><span class="sig-name descname"><span class="pre">get_logs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/admin_page.html#get_logs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#admin_page.get_logs" title="Link to this definition"></a></dt>
+<dd><p>Retrieve and return the contents of the log file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A JSON response with the log file contents or an error message.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>flask.Response</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="admin_page.get_x">
+<span class="sig-prename descclassname"><span class="pre">admin_page.</span></span><span class="sig-name descname"><span class="pre">get_x</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/admin_page.html#get_x"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#admin_page.get_x" title="Link to this definition"></a></dt>
+<dd><p>Get the current value of the ToDoNow variable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A JSON response with the current value of ToDoNow.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>flask.Response</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="admin_page.index">
+<span class="sig-prename descclassname"><span class="pre">admin_page.</span></span><span class="sig-name descname"><span class="pre">index</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/admin_page.html#index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#admin_page.index" title="Link to this definition"></a></dt>
+<dd><p>Render the index page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The rendered HTML template for the index page.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="admin_page.login">
+<span class="sig-prename descclassname"><span class="pre">admin_page.</span></span><span class="sig-name descname"><span class="pre">login</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/admin_page.html#login"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#admin_page.login" title="Link to this definition"></a></dt>
+<dd><p>Handle login redirection based on the selected option.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A redirect to the appropriate login page.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>werkzeug.wrappers.Response</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="admin_page.login_aimp">
+<span class="sig-prename descclassname"><span class="pre">admin_page.</span></span><span class="sig-name descname"><span class="pre">login_aimp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/admin_page.html#login_aimp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#admin_page.login_aimp" title="Link to this definition"></a></dt>
+<dd><p>Handle login for the AIMP panel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The rendered HTML template for the AIMP login page, or a redirect to the AIMP dashboard.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="admin_page.login_logs">
+<span class="sig-prename descclassname"><span class="pre">admin_page.</span></span><span class="sig-name descname"><span class="pre">login_logs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/admin_page.html#login_logs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#admin_page.login_logs" title="Link to this definition"></a></dt>
+<dd><p>Handle login for the Logs panel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The rendered HTML template for the Logs login page, or a redirect to the Logs dashboard.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="admin_page.login_songs">
+<span class="sig-prename descclassname"><span class="pre">admin_page.</span></span><span class="sig-name descname"><span class="pre">login_songs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/admin_page.html#login_songs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#admin_page.login_songs" title="Link to this definition"></a></dt>
+<dd><p>Display the login page for the Songs panel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The rendered HTML template for the Songs login page.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="admin_page.logout_aimp">
+<span class="sig-prename descclassname"><span class="pre">admin_page.</span></span><span class="sig-name descname"><span class="pre">logout_aimp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/admin_page.html#logout_aimp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#admin_page.logout_aimp" title="Link to this definition"></a></dt>
+<dd><p>Log out from the AIMP panel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A redirect to the index page.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>werkzeug.wrappers.Response</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="admin_page.logout_logs">
+<span class="sig-prename descclassname"><span class="pre">admin_page.</span></span><span class="sig-name descname"><span class="pre">logout_logs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/admin_page.html#logout_logs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#admin_page.logout_logs" title="Link to this definition"></a></dt>
+<dd><p>Log out from the Logs panel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A redirect to the index page.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>werkzeug.wrappers.Response</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="admin_page.logs_dashboard">
+<span class="sig-prename descclassname"><span class="pre">admin_page.</span></span><span class="sig-name descname"><span class="pre">logs_dashboard</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/admin_page.html#logs_dashboard"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#admin_page.logs_dashboard" title="Link to this definition"></a></dt>
+<dd><p>Display the Logs dashboard.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The rendered HTML template for the Logs dashboard or a redirect to the index page.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="admin_page.refuse_song">
+<span class="sig-prename descclassname"><span class="pre">admin_page.</span></span><span class="sig-name descname"><span class="pre">refuse_song</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">song_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/admin_page.html#refuse_song"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#admin_page.refuse_song" title="Link to this definition"></a></dt>
+<dd><p>Handle the refusal of a song.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>song_id</strong> (<em>str</em>) – The ID of the song to refuse.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A JSON response indicating the success or failure of the refusal.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>flask.Response</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="admin_page.send_mail">
+<span class="sig-prename descclassname"><span class="pre">admin_page.</span></span><span class="sig-name descname"><span class="pre">send_mail</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/admin_page.html#send_mail"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#admin_page.send_mail" title="Link to this definition"></a></dt>
+<dd><p>Display the page for sending an email regarding songs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The rendered HTML template for the send email page.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="admin_page.songs_dashboard">
+<span class="sig-prename descclassname"><span class="pre">admin_page.</span></span><span class="sig-name descname"><span class="pre">songs_dashboard</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/admin_page.html#songs_dashboard"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#admin_page.songs_dashboard" title="Link to this definition"></a></dt>
+<dd><p>Display the Songs dashboard after successful login and API request.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The rendered HTML template for the Songs dashboard with the song data, or a redirect to the send email page.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="admin_page.update">
+<span class="sig-prename descclassname"><span class="pre">admin_page.</span></span><span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/admin_page.html#update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#admin_page.update" title="Link to this definition"></a></dt>
+<dd><p>Update the ToDo variable based on the received JSON data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A JSON response indicating the success or failure of the update.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>flask.Response</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="admin_page.verify">
+<span class="sig-prename descclassname"><span class="pre">admin_page.</span></span><span class="sig-name descname"><span class="pre">verify</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/admin_page.html#verify"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#admin_page.verify" title="Link to this definition"></a></dt>
+<dd><p>Verify the admin code for accessing the Songs panel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A redirect to the Songs dashboard or an error message.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>werkzeug.wrappers.Response</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to Your Project’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="koyeb_api.html" class="btn btn-neutral float-right" title="Koyeb API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Jakub Michalski &amp; Mateusz Snela.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,7 @@
+Text Analysis
+=============
+
+.. automodule:: text_analysis
+   :members:
+   :undoc-members:
+   :show-inheritance:

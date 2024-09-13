@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Koyeb API &mdash; SchoolRadioZSZ  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Sentiment Analysis" href="sentiment_analysis.html" />
+    <link rel="prev" title="Admin Page" href="admin_page.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            SchoolRadioZSZ
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="admin_page.html">Admin Page</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Koyeb API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#main.GeminiApi"><code class="docutils literal notranslate"><span class="pre">GeminiApi</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#main.GeminiApi.model"><code class="docutils literal notranslate"><span class="pre">GeminiApi.model</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#main.GeminiApi.model_instance"><code class="docutils literal notranslate"><span class="pre">GeminiApi.model_instance</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#main.GeminiApi.PROMPT_SENTIMENT"><code class="docutils literal notranslate"><span class="pre">GeminiApi.PROMPT_SENTIMENT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#main.GeminiApi.sentiment_analysis"><code class="docutils literal notranslate"><span class="pre">GeminiApi.sentiment_analysis()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#main.SentimentRequest"><code class="docutils literal notranslate"><span class="pre">SentimentRequest</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#main.SentimentRequest.lyrics"><code class="docutils literal notranslate"><span class="pre">SentimentRequest.lyrics</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id0"><code class="docutils literal notranslate"><span class="pre">SentimentRequest.lyrics</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#main.SentimentRequest.model_computed_fields"><code class="docutils literal notranslate"><span class="pre">SentimentRequest.model_computed_fields</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#main.SentimentRequest.model_config"><code class="docutils literal notranslate"><span class="pre">SentimentRequest.model_config</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#main.SentimentRequest.model_fields"><code class="docutils literal notranslate"><span class="pre">SentimentRequest.model_fields</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#main.analyze_sentiment"><code class="docutils literal notranslate"><span class="pre">analyze_sentiment()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sentiment_analysis.html">Sentiment Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Modules</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">SchoolRadioZSZ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Koyeb API</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/koyeb_api.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-main">
+<span id="koyeb-api"></span><h1>Koyeb API<a class="headerlink" href="#module-main" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="main.GeminiApi">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">GeminiApi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'gemini-1.5-flash'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#GeminiApi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.GeminiApi" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A class to interact with the Gemini API for sentiment analysis of song lyrics.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="main.GeminiApi.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#main.GeminiApi.model" title="Link to this definition"></a></dt>
+<dd><p>The model name used for generating content.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="main.GeminiApi.model_instance">
+<span class="sig-name descname"><span class="pre">model_instance</span></span><a class="headerlink" href="#main.GeminiApi.model_instance" title="Link to this definition"></a></dt>
+<dd><p>An instance of the GenerativeModel initialized with the prompt.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>GenerativeModel</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="main.GeminiApi.PROMPT_SENTIMENT">
+<span class="sig-name descname"><span class="pre">PROMPT_SENTIMENT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Create</span> <span class="pre">a</span> <span class="pre">system</span> <span class="pre">for</span> <span class="pre">evaluating</span> <span class="pre">song</span> <span class="pre">lyrics</span> <span class="pre">for</span> <span class="pre">a</span> <span class="pre">high</span> <span class="pre">school</span> <span class="pre">radio</span> <span class="pre">station</span> <span class="pre">(students</span> <span class="pre">aged</span> <span class="pre">16-21).</span> <span class="pre">The</span> <span class="pre">system</span> <span class="pre">should</span> <span class="pre">classify</span> <span class="pre">songs</span> <span class="pre">into</span> <span class="pre">three</span> <span class="pre">categories:</span> <span class="pre">positive</span> <span class="pre">sentiment</span> <span class="pre">(can</span> <span class="pre">be</span> <span class="pre">played),</span> <span class="pre">neutral</span> <span class="pre">sentiment</span> <span class="pre">(requires</span> <span class="pre">manual</span> <span class="pre">review),</span> <span class="pre">or</span> <span class="pre">negative</span> <span class="pre">sentiment</span> <span class="pre">(automatically</span> <span class="pre">rejected).\nEvaluation</span> <span class="pre">criteria:\n\nReject</span> <span class="pre">content</span> <span class="pre">that</span> <span class="pre">is</span> <span class="pre">explicitly</span> <span class="pre">offensive</span> <span class="pre">or</span> <span class="pre">promotes</span> <span class="pre">harmful</span> <span class="pre">behavior\nAllow</span> <span class="pre">content</span> <span class="pre">that</span> <span class="pre">discusses</span> <span class="pre">personal</span> <span class="pre">struggles,</span> <span class="pre">emotions,</span> <span class="pre">or</span> <span class="pre">social</span> <span class="pre">issues</span> <span class="pre">in</span> <span class="pre">a</span> <span class="pre">non-harmful</span> <span class="pre">way\nBe</span> <span class="pre">lenient</span> <span class="pre">towards</span> <span class="pre">mild</span> <span class="pre">stereotypes</span> <span class="pre">or</span> <span class="pre">generational</span> <span class="pre">comments</span> <span class="pre">if</span> <span class="pre">the</span> <span class="pre">overall</span> <span class="pre">message</span> <span class="pre">is</span> <span class="pre">positive\nBlock</span> <span class="pre">content</span> <span class="pre">that</span> <span class="pre">is</span> <span class="pre">explicitly</span> <span class="pre">patriotic</span> <span class="pre">or</span> <span class="pre">religious\nBlock</span> <span class="pre">songs</span> <span class="pre">typically</span> <span class="pre">intended</span> <span class="pre">for</span> <span class="pre">young</span> <span class="pre">children\nConsider</span> <span class="pre">the</span> <span class="pre">overall</span> <span class="pre">tone</span> <span class="pre">and</span> <span class="pre">message</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">song\nDisregard</span> <span class="pre">profanity</span> <span class="pre">(it\'s</span> <span class="pre">filtered</span> <span class="pre">separately)\n\nAnalyze</span> <span class="pre">the</span> <span class="pre">following</span> <span class="pre">song</span> <span class="pre">lyrics</span> <span class="pre">and</span> <span class="pre">classify</span> <span class="pre">them</span> <span class="pre">according</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">above</span> <span class="pre">criteria.</span> <span class="pre">Return</span> <span class="pre">the</span> <span class="pre">response</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">following</span> <span class="pre">JSON</span> <span class="pre">format:\n{\n&quot;sentiment&quot;:</span> <span class="pre">int,</span> <span class="pre">//</span> <span class="pre">&quot;positive=0&quot;,</span> <span class="pre">&quot;negative=2&quot;,</span> <span class="pre">or</span> <span class="pre">&quot;neutral=1&quot;\n&quot;sentiment_score&quot;:</span> <span class="pre">number,</span> <span class="pre">//</span> <span class="pre">-1</span> <span class="pre">to</span> <span class="pre">1</span> <span class="pre">(0</span> <span class="pre">for</span> <span class="pre">neutral)\n&quot;confidence&quot;:</span> <span class="pre">number,</span> <span class="pre">//</span> <span class="pre">0</span> <span class="pre">to</span> <span class="pre">1\n&quot;explanation&quot;:</span> <span class="pre">string</span> <span class="pre">//</span> <span class="pre">One</span> <span class="pre">concise</span> <span class="pre">sentence</span> <span class="pre">justifying</span> <span class="pre">the</span> <span class="pre">assessment\n}\nRemember</span> <span class="pre">to</span> <span class="pre">always</span> <span class="pre">provide</span> <span class="pre">the</span> <span class="pre">response</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">specified</span> <span class="pre">JSON</span> <span class="pre">format,</span> <span class="pre">without</span> <span class="pre">any</span> <span class="pre">additional</span> <span class="pre">comments</span> <span class="pre">or</span> <span class="pre">explanations</span> <span class="pre">outside</span> <span class="pre">the</span> <span class="pre">structure.</span> <span class="pre">Songs</span> <span class="pre">that</span> <span class="pre">express</span> <span class="pre">personal</span> <span class="pre">struggles,</span> <span class="pre">emotions,</span> <span class="pre">life</span> <span class="pre">reflections,</span> <span class="pre">or</span> <span class="pre">social</span> <span class="pre">commentary</span> <span class="pre">in</span> <span class="pre">a</span> <span class="pre">constructive</span> <span class="pre">or</span> <span class="pre">artistic</span> <span class="pre">way,</span> <span class="pre">without</span> <span class="pre">being</span> <span class="pre">explicitly</span> <span class="pre">harmful</span> <span class="pre">or</span> <span class="pre">promoting</span> <span class="pre">negative</span> <span class="pre">stereotypes,</span> <span class="pre">should</span> <span class="pre">be</span> <span class="pre">classified</span> <span class="pre">as</span> <span class="pre">positive.</span> <span class="pre">Be</span> <span class="pre">cautious</span> <span class="pre">with</span> <span class="pre">humor</span> <span class="pre">that</span> <span class="pre">might</span> <span class="pre">be</span> <span class="pre">perceived</span> <span class="pre">as</span> <span class="pre">offensive</span> <span class="pre">or</span> <span class="pre">that</span> <span class="pre">reinforces</span> <span class="pre">negative</span> <span class="pre">stereotypes</span> <span class="pre">about</span> <span class="pre">appearance</span> <span class="pre">or</span> <span class="pre">other</span> <span class="pre">personal</span> <span class="pre">characteristics.</span> <span class="pre">Classify</span> <span class="pre">as</span> <span class="pre">negative</span> <span class="pre">any</span> <span class="pre">content</span> <span class="pre">that</span> <span class="pre">mocks</span> <span class="pre">or</span> <span class="pre">demeans</span> <span class="pre">individuals</span> <span class="pre">based</span> <span class="pre">on</span> <span class="pre">their</span> <span class="pre">physical</span> <span class="pre">appearance</span> <span class="pre">or</span> <span class="pre">other</span> <span class="pre">personal</span> <span class="pre">traits,</span> <span class="pre">even</span> <span class="pre">if</span> <span class="pre">presented</span> <span class="pre">in</span> <span class="pre">a</span> <span class="pre">humorous</span> <span class="pre">context.\nSong</span> <span class="pre">lyrics</span> <span class="pre">to</span> <span class="pre">analyze:'</span></em><a class="headerlink" href="#main.GeminiApi.PROMPT_SENTIMENT" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="main.GeminiApi.sentiment_analysis">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sentiment_analysis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lyrics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/main.html#GeminiApi.sentiment_analysis"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.GeminiApi.sentiment_analysis" title="Link to this definition"></a></dt>
+<dd><p>Analyzes the sentiment of song lyrics using the Gemini API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>lyrics</strong> (<em>str</em>) – The song lyrics to analyze.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The sentiment analysis result as a dictionary, or None if the analysis fails.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Optional[Dict[str, Any]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="main.SentimentRequest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">SentimentRequest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lyrics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#SentimentRequest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.SentimentRequest" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>A Pydantic model to validate the request body for sentiment analysis.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="main.SentimentRequest.lyrics">
+<span class="sig-name descname"><span class="pre">lyrics</span></span><a class="headerlink" href="#main.SentimentRequest.lyrics" title="Link to this definition"></a></dt>
+<dd><p>The song lyrics to analyze.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">lyrics</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="main.SentimentRequest.model_computed_fields">
+<span class="sig-name descname"><span class="pre">model_computed_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ComputedFieldInfo</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#main.SentimentRequest.model_computed_fields" title="Link to this definition"></a></dt>
+<dd><p>A dictionary of computed field names and their corresponding <cite>ComputedFieldInfo</cite> objects.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="main.SentimentRequest.model_config">
+<span class="sig-name descname"><span class="pre">model_config</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">ConfigDict</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#main.SentimentRequest.model_config" title="Link to this definition"></a></dt>
+<dd><p>Configuration for the model, should be a dictionary conforming to [<cite>ConfigDict</cite>][pydantic.config.ConfigDict].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="main.SentimentRequest.model_fields">
+<span class="sig-name descname"><span class="pre">model_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">FieldInfo</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'lyrics':</span> <span class="pre">FieldInfo(annotation=str,</span> <span class="pre">required=True)}</span></em><a class="headerlink" href="#main.SentimentRequest.model_fields" title="Link to this definition"></a></dt>
+<dd><p>Metadata about the fields defined on the model,
+mapping of field names to [<cite>FieldInfo</cite>][pydantic.fields.FieldInfo].</p>
+<p>This replaces <cite>Model.__fields__</cite> from Pydantic V1.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="main.analyze_sentiment">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">analyze_sentiment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SentimentRequest</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#analyze_sentiment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.analyze_sentiment" title="Link to this definition"></a></dt>
+<dd><p>API endpoint to analyze the sentiment of provided song lyrics.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> (<em>SentimentRequest</em>) – The request body containing the song lyrics.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>JSON response with the sentiment analysis result.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>HTTPException</strong> – If the sentiment analysis fails or encounters an internal error.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="admin_page.html" class="btn btn-neutral float-left" title="Admin Page" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="sentiment_analysis.html" class="btn btn-neutral float-right" title="Sentiment Analysis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Jakub Michalski &amp; Mateusz Snela.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

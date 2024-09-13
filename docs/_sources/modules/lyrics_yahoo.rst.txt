@@ -1,0 +1,7 @@
+Lyrics Yahoo
+============
+
+.. automodule:: lyrics_yahoo
+   :members:
+   :undoc-members:
+   :show-inheritance:

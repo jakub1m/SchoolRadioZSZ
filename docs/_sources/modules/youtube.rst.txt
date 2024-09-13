@@ -1,0 +1,7 @@
+YouTube
+=======
+
+.. automodule:: youtube
+   :members:
+   :undoc-members:
+   :show-inheritance:

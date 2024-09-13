@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lyrics Scraper &mdash; SchoolRadioZSZ  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Lyrics Yahoo" href="lyrics_yahoo.html" />
+    <link rel="prev" title="Lyrics HTTPX" href="lyrics_httpx.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            SchoolRadioZSZ
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../admin_page.html">Admin Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../koyeb_api.html">Koyeb API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sentiment_analysis.html">Sentiment Analysis</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../modules.html">Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="logging_config.html">Logging Config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lyrics_google.html">Lyrics Google</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lyrics_httpx.html">Lyrics HTTPX</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Lyrics Scraper</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#lyrics_scraper.AZLyrics"><code class="docutils literal notranslate"><span class="pre">AZLyrics</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#lyrics_scraper.AZLyrics.get_lyrics"><code class="docutils literal notranslate"><span class="pre">AZLyrics.get_lyrics()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#lyrics_scraper.BaseLyricsScraper"><code class="docutils literal notranslate"><span class="pre">BaseLyricsScraper</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#lyrics_scraper.BaseLyricsScraper.session"><code class="docutils literal notranslate"><span class="pre">BaseLyricsScraper.session</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lyrics_scraper.BaseLyricsScraper.data"><code class="docutils literal notranslate"><span class="pre">BaseLyricsScraper.data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lyrics_scraper.BaseLyricsScraper.get_data"><code class="docutils literal notranslate"><span class="pre">BaseLyricsScraper.get_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lyrics_scraper.BaseLyricsScraper.get_lyrics"><code class="docutils literal notranslate"><span class="pre">BaseLyricsScraper.get_lyrics()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#lyrics_scraper.Groove"><code class="docutils literal notranslate"><span class="pre">Groove</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#lyrics_scraper.Groove.get_lyrics"><code class="docutils literal notranslate"><span class="pre">Groove.get_lyrics()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#lyrics_scraper.Teksciory"><code class="docutils literal notranslate"><span class="pre">Teksciory</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#lyrics_scraper.Teksciory.get_lyrics"><code class="docutils literal notranslate"><span class="pre">Teksciory.get_lyrics()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#lyrics_scraper.Tekstowo"><code class="docutils literal notranslate"><span class="pre">Tekstowo</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#lyrics_scraper.Tekstowo.get_lyrics"><code class="docutils literal notranslate"><span class="pre">Tekstowo.get_lyrics()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="lyrics_yahoo.html">Lyrics Yahoo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html">Main</a></li>
+<li class="toctree-l2"><a class="reference internal" href="text_analysis.html">Text Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="youtube.html">YouTube</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SchoolRadioZSZ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../modules.html">Modules</a></li>
+      <li class="breadcrumb-item active">Lyrics Scraper</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/modules/lyrics_scraper.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-lyrics_scraper">
+<span id="lyrics-scraper"></span><h1>Lyrics Scraper<a class="headerlink" href="#module-lyrics_scraper" title="Link to this heading"></a></h1>
+<p>Module for scraping song lyrics from various websites.</p>
+<p>This module contains classes for fetching song lyrics from services such as
+Tekstowo, AZLyrics, Teksciory, and Groove. It utilizes asynchronous
+processing for efficient data retrieval.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="lyrics_scraper.AZLyrics">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">lyrics_scraper.</span></span><span class="sig-name descname"><span class="pre">AZLyrics</span></span><a class="reference internal" href="../_modules/lyrics_scraper.html#AZLyrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lyrics_scraper.AZLyrics" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseLyricsScraper</span></code></p>
+<p>Scraper for the AZLyrics service.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="lyrics_scraper.AZLyrics.get_lyrics">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_lyrics</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/lyrics_scraper.html#AZLyrics.get_lyrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lyrics_scraper.AZLyrics.get_lyrics" title="Link to this definition"></a></dt>
+<dd><p>Extract lyrics from the AZLyrics webpage.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The song lyrics or an error message.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="lyrics_scraper.BaseLyricsScraper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">lyrics_scraper.</span></span><span class="sig-name descname"><span class="pre">BaseLyricsScraper</span></span><a class="reference internal" href="../_modules/lyrics_scraper.html#BaseLyricsScraper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lyrics_scraper.BaseLyricsScraper" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<p>Base abstract class for lyrics scrapers.</p>
+<p>This class defines the basic structure and behavior for all
+lyrics scrapers. It provides common methods for fetching
+and processing HTML data.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lyrics_scraper.BaseLyricsScraper.session">
+<span class="sig-name descname"><span class="pre">session</span></span><a class="headerlink" href="#lyrics_scraper.BaseLyricsScraper.session" title="Link to this definition"></a></dt>
+<dd><p>aiohttp session for making HTTP requests.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Optional[aiohttp.ClientSession]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lyrics_scraper.BaseLyricsScraper.data">
+<span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#lyrics_scraper.BaseLyricsScraper.data" title="Link to this definition"></a></dt>
+<dd><p>BeautifulSoup object containing parsed HTML data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Optional[BeautifulSoup]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lyrics_scraper.BaseLyricsScraper.get_data">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/lyrics_scraper.html#BaseLyricsScraper.get_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lyrics_scraper.BaseLyricsScraper.get_data" title="Link to this definition"></a></dt>
+<dd><p>Fetch HTML data from the given URL and parse it into a BeautifulSoup object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>url</strong> (<em>str</em>) – The URL of the lyrics page.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>RuntimeError</strong> – If the session is not initialized or an error occurs during data fetching.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lyrics_scraper.BaseLyricsScraper.get_lyrics">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_lyrics</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/lyrics_scraper.html#BaseLyricsScraper.get_lyrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lyrics_scraper.BaseLyricsScraper.get_lyrics" title="Link to this definition"></a></dt>
+<dd><p>Abstract method to extract lyrics from the parsed HTML data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The song lyrics or an error message.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+<p>This method must be implemented by inheriting classes.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="lyrics_scraper.Groove">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">lyrics_scraper.</span></span><span class="sig-name descname"><span class="pre">Groove</span></span><a class="reference internal" href="../_modules/lyrics_scraper.html#Groove"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lyrics_scraper.Groove" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseLyricsScraper</span></code></p>
+<p>Scraper for the Groove service.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="lyrics_scraper.Groove.get_lyrics">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_lyrics</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/lyrics_scraper.html#Groove.get_lyrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lyrics_scraper.Groove.get_lyrics" title="Link to this definition"></a></dt>
+<dd><p>Extract lyrics from the Groove webpage.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The song lyrics or an error message.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="lyrics_scraper.Teksciory">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">lyrics_scraper.</span></span><span class="sig-name descname"><span class="pre">Teksciory</span></span><a class="reference internal" href="../_modules/lyrics_scraper.html#Teksciory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lyrics_scraper.Teksciory" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseLyricsScraper</span></code></p>
+<p>Scraper for the Teksciory service.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="lyrics_scraper.Teksciory.get_lyrics">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_lyrics</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/lyrics_scraper.html#Teksciory.get_lyrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lyrics_scraper.Teksciory.get_lyrics" title="Link to this definition"></a></dt>
+<dd><p>Extract lyrics from the Teksciory webpage.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The song lyrics or an error message.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="lyrics_scraper.Tekstowo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">lyrics_scraper.</span></span><span class="sig-name descname"><span class="pre">Tekstowo</span></span><a class="reference internal" href="../_modules/lyrics_scraper.html#Tekstowo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lyrics_scraper.Tekstowo" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseLyricsScraper</span></code></p>
+<p>Scraper for the Textowo service</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="lyrics_scraper.Tekstowo.get_lyrics">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_lyrics</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/lyrics_scraper.html#Tekstowo.get_lyrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lyrics_scraper.Tekstowo.get_lyrics" title="Link to this definition"></a></dt>
+<dd><p>Extract lyric from the Tekstowo webpage.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the song lyrics or an error message.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="lyrics_httpx.html" class="btn btn-neutral float-left" title="Lyrics HTTPX" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="lyrics_yahoo.html" class="btn btn-neutral float-right" title="Lyrics Yahoo" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Jakub Michalski &amp; Mateusz Snela.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

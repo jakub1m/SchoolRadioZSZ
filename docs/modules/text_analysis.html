@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Text Analysis &mdash; SchoolRadioZSZ  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="YouTube" href="youtube.html" />
+    <link rel="prev" title="Main" href="main.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            SchoolRadioZSZ
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../admin_page.html">Admin Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../koyeb_api.html">Koyeb API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sentiment_analysis.html">Sentiment Analysis</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../modules.html">Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="logging_config.html">Logging Config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lyrics_google.html">Lyrics Google</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lyrics_httpx.html">Lyrics HTTPX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lyrics_scraper.html">Lyrics Scraper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lyrics_yahoo.html">Lyrics Yahoo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html">Main</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Text Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#text_analysis.TextAnalyzer"><code class="docutils literal notranslate"><span class="pre">TextAnalyzer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#text_analysis.TextAnalyzer.profanity_pl_automaton"><code class="docutils literal notranslate"><span class="pre">TextAnalyzer.profanity_pl_automaton</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#text_analysis.TextAnalyzer.profanity_en_automaton"><code class="docutils literal notranslate"><span class="pre">TextAnalyzer.profanity_en_automaton</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#text_analysis.TextAnalyzer.emoji_unicode_ranges"><code class="docutils literal notranslate"><span class="pre">TextAnalyzer.emoji_unicode_ranges</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#text_analysis.TextAnalyzer.initialize"><code class="docutils literal notranslate"><span class="pre">TextAnalyzer.initialize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#text_analysis.TextAnalyzer._create_emoji_unicode_ranges"><code class="docutils literal notranslate"><span class="pre">TextAnalyzer._create_emoji_unicode_ranges()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#text_analysis.TextAnalyzer.analyze_profanity"><code class="docutils literal notranslate"><span class="pre">TextAnalyzer.analyze_profanity()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#text_analysis.TextAnalyzer.del_emoji"><code class="docutils literal notranslate"><span class="pre">TextAnalyzer.del_emoji()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id0"><code class="docutils literal notranslate"><span class="pre">TextAnalyzer.initialize()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="youtube.html">YouTube</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SchoolRadioZSZ</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../modules.html">Modules</a></li>
+      <li class="breadcrumb-item active">Text Analysis</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/modules/text_analysis.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-text_analysis">
+<span id="text-analysis"></span><h1>Text Analysis<a class="headerlink" href="#module-text_analysis" title="Link to this heading"></a></h1>
+<p>TextAnalyzer Module</p>
+<p>This module provides the <cite>TextAnalyzer</cite> class which is used to analyze text content for profanities and perform language detection.
+It uses Aho-Corasick automata for efficient profanity detection and supports both Polish and English languages.
+Additionally, it includes methods for removing emojis from text and detecting the language of the input text.</p>
+<p>Modules:
+- <cite>re</cite>: Regular expressions for pattern matching.
+- <cite>typing</cite>: Type hinting for better code clarity.
+- <cite>langdetect</cite>: For detecting the language of the text.
+- <cite>ahocorasick</cite>: For efficient string matching using Aho-Corasick algorithm.
+- <cite>logging</cite>: For logging messages and errors.
+- <cite>time</cite> and <cite>asyncio</cite>: For handling timing and asynchronous operations.</p>
+<p>Classes:
+- <cite>TextAnalyzer</cite>: The main class that provides methods to initialize profanities, remove emojis, count profanity occurrences, analyze text for profanities, and detect language.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="text_analysis.TextAnalyzer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">text_analysis.</span></span><span class="sig-name descname"><span class="pre">TextAnalyzer</span></span><a class="reference internal" href="../_modules/text_analysis.html#TextAnalyzer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#text_analysis.TextAnalyzer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A class to analyze text content for profanities and perform language detection.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="text_analysis.TextAnalyzer.profanity_pl_automaton">
+<span class="sig-name descname"><span class="pre">profanity_pl_automaton</span></span><a class="headerlink" href="#text_analysis.TextAnalyzer.profanity_pl_automaton" title="Link to this definition"></a></dt>
+<dd><p>Aho-Corasick automaton for Polish profanities.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Automaton</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="text_analysis.TextAnalyzer.profanity_en_automaton">
+<span class="sig-name descname"><span class="pre">profanity_en_automaton</span></span><a class="headerlink" href="#text_analysis.TextAnalyzer.profanity_en_automaton" title="Link to this definition"></a></dt>
+<dd><p>Aho-Corasick automaton for English profanities.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Automaton</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="text_analysis.TextAnalyzer.emoji_unicode_ranges">
+<span class="sig-name descname"><span class="pre">emoji_unicode_ranges</span></span><a class="headerlink" href="#text_analysis.TextAnalyzer.emoji_unicode_ranges" title="Link to this definition"></a></dt>
+<dd><p>A set of Unicode code points representing emojis and special characters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Set[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="text_analysis.TextAnalyzer.initialize">
+<span class="sig-name descname"><span class="pre">initialize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/text_analysis.html#TextAnalyzer.initialize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#text_analysis.TextAnalyzer.initialize" title="Link to this definition"></a></dt>
+<dd><p>Loads profanity words into the automaton for Polish and English.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">_load_words_into_automaton(filename</span></span></dt>
+<dd><p>str, automaton: Automaton): Loads words from a file into the Aho-Corasick automaton.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="text_analysis.TextAnalyzer._create_emoji_unicode_ranges">
+<span class="sig-name descname"><span class="pre">_create_emoji_unicode_ranges</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/text_analysis.html#TextAnalyzer._create_emoji_unicode_ranges"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#text_analysis.TextAnalyzer._create_emoji_unicode_ranges" title="Link to this definition"></a></dt>
+<dd><p>Creates a set of Unicode ranges for emojis and special characters.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">del_emoji(lyrics</span></span></dt>
+<dd><p>str) -&gt; str: Removes emojis from the given text.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">_count_occurrences(text</span></span></dt>
+<dd><p>str, automaton: Automaton) -&gt; Dict[str, int]: Counts occurrences of profane words in the text.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">analyze_profanity(text</span></span></dt>
+<dd><p>str) -&gt; str: Analyzes the text for profanities and returns a message based on the count.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">_language_detection(text</span></span></dt>
+<dd><p>str) -&gt; str: Detects the language of the given text.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="text_analysis.TextAnalyzer.analyze_profanity">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">analyze_profanity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/text_analysis.html#TextAnalyzer.analyze_profanity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#text_analysis.TextAnalyzer.analyze_profanity" title="Link to this definition"></a></dt>
+<dd><p>Analyzes the text for profanities and returns a message based on the count.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> (<em>str</em>) – The input text to analyze for profanities.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A message indicating the level of profanity detected.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="text_analysis.TextAnalyzer.del_emoji">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">del_emoji</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lyrics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/text_analysis.html#TextAnalyzer.del_emoji"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#text_analysis.TextAnalyzer.del_emoji" title="Link to this definition"></a></dt>
+<dd><p>Removes emojis from the given text.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>lyrics</strong> (<em>str</em>) – The input text containing emojis.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The text with emojis removed.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">initialize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/text_analysis.html#TextAnalyzer.initialize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd><p>Loads profanity words into the Aho-Corasick automaton for Polish and English.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="main.html" class="btn btn-neutral float-left" title="Main" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="youtube.html" class="btn btn-neutral float-right" title="YouTube" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Jakub Michalski &amp; Mateusz Snela.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

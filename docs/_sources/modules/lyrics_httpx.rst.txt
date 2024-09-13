@@ -1,0 +1,7 @@
+Lyrics HTTPX
+============
+
+.. automodule:: lyrics_httpx
+   :members:
+   :undoc-members:
+   :show-inheritance:

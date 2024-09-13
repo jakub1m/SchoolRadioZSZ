@@ -1,0 +1,7 @@
+Lyrics Google
+=============
+
+.. automodule:: lyrics_google
+   :members:
+   :undoc-members:
+   :show-inheritance:

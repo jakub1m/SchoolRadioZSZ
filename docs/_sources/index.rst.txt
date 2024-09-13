@@ -1,0 +1,18 @@
+Welcome to SchoolRadioZSZ documentation!
+========================================
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+   admin_page
+   koyeb_api
+   sentiment_analysis
+   modules
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`

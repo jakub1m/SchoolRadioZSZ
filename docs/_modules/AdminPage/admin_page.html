@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AdminPage.admin_page &#8212; SchoolRadioZSZ 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=12dfc556" />
+    <script src="../../_static/documentation_options.js?v=2709fde1"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for AdminPage.admin_page</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">jsonify</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">url_for</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">secret_key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">urandom</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span>
+
+<span class="n">ToDo</span> <span class="o">=</span> <span class="n">ToDoNow</span> <span class="o">=</span> <span class="s2">&quot;Pass&quot;</span>
+
+<span class="n">PASSWORD_AIMP</span> <span class="o">=</span> <span class="s2">&quot;123&quot;</span>
+<span class="n">PASSWORD_LOGS</span> <span class="o">=</span> <span class="s2">&quot;123&quot;</span>
+<span class="n">LOG_FILE_PATH</span> <span class="o">=</span> <span class="s2">&quot;app.log&quot;</span>
+<span class="n">SONGS_URL</span> <span class="o">=</span> <span class="s2">&quot;https://59be-85-221-139-33.ngrok-free.app&quot;</span>
+
+<div class="viewcode-block" id="index">
+<a class="viewcode-back" href="../../admin_page.html#AdminPage.admin_page.index">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Render the index page.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The rendered HTML template for the index page.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;index.html&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="login">
+<a class="viewcode-back" href="../../admin_page.html#AdminPage.admin_page.login">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/login&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">login</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Handle login redirection based on the selected option.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        werkzeug.wrappers.Response: A redirect to the appropriate login page.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">option</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;option&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">option</span> <span class="o">==</span> <span class="s1">&#39;Aimp&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;login_aimp&#39;</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">option</span> <span class="o">==</span> <span class="s1">&#39;Songs&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;send_mail&#39;</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">option</span> <span class="o">==</span> <span class="s1">&#39;Logs&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;login_logs&#39;</span><span class="p">))</span></div>
+
+
+<span class="c1"># ================================= AIMP =========================================</span>
+
+<div class="viewcode-block" id="login_aimp">
+<a class="viewcode-back" href="../../admin_page.html#AdminPage.admin_page.login_aimp">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/aimp/login&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">login_aimp</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Handle login for the AIMP panel.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The rendered HTML template for the AIMP login page, or a redirect to the AIMP dashboard.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">password_attempt</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">password_attempt</span> <span class="o">==</span> <span class="n">PASSWORD_AIMP</span><span class="p">:</span>
+            <span class="n">session</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;aimp_panel&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="n">session</span><span class="p">[</span><span class="s1">&#39;logged_in_aimp&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;aimp_dashboard&#39;</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;login_aimp.html&#39;</span><span class="p">,</span> <span class="n">error</span><span class="o">=</span><span class="s2">&quot;Nieprawidłowe hasło&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;login_aimp.html&#39;</span><span class="p">,</span> <span class="n">error</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="logout_aimp">
+<a class="viewcode-back" href="../../admin_page.html#AdminPage.admin_page.logout_aimp">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/aimp/logout&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">logout_aimp</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Log out from the AIMP panel.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        werkzeug.wrappers.Response: A redirect to the index page.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">session</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;logged_in_aimp&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="aimp_dashboard">
+<a class="viewcode-back" href="../../admin_page.html#AdminPage.admin_page.aimp_dashboard">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/aimp/panel&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">aimp_dashboard</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Display the AIMP dashboard.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The rendered HTML template for the AIMP dashboard or a redirect to the index page.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="s1">&#39;logged_in_aimp&#39;</span> <span class="ow">in</span> <span class="n">session</span><span class="p">:</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;logged_in_aimp&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">session</span><span class="p">[</span><span class="s1">&#39;aimp_panel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;aimp_dashboard.html&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="update">
+<a class="viewcode-back" href="../../admin_page.html#AdminPage.admin_page.update">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/aimp/update&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">update</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Update the ToDo variable based on the received JSON data.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        flask.Response: A JSON response indicating the success or failure of the update.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="s1">&#39;aimp_panel&#39;</span> <span class="ow">in</span> <span class="n">session</span><span class="p">:</span>
+        <span class="k">global</span> <span class="n">ToDo</span>
+        <span class="n">button_value</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;button&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">ToDo</span> <span class="o">=</span> <span class="n">button_value</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="s1">&#39;Wartość zmiennej ToDo została zaktualizowana.&#39;</span><span class="p">,</span> <span class="s1">&#39;ToDo&#39;</span><span class="p">:</span> <span class="n">ToDo</span><span class="p">})</span>
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;Error&#39;</span><span class="p">:</span> <span class="s1">&#39;Unautorized attempt&#39;</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="get_x">
+<a class="viewcode-back" href="../../admin_page.html#AdminPage.admin_page.get_x">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/get&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">get_x</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the current value of the ToDoNow variable.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        flask.Response: A JSON response with the current value of ToDoNow.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">ToDo</span><span class="p">,</span> <span class="n">ToDoNow</span>
+    <span class="n">ToDoNow</span> <span class="o">=</span> <span class="n">ToDo</span>
+    <span class="n">ToDo</span> <span class="o">=</span> <span class="s2">&quot;Pass&quot;</span>
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;ToDo&#39;</span><span class="p">:</span> <span class="n">ToDoNow</span><span class="p">})</span></div>
+
+
+<span class="c1"># ================================== LOGS =======================================</span>
+
+<div class="viewcode-block" id="login_logs">
+<a class="viewcode-back" href="../../admin_page.html#AdminPage.admin_page.login_logs">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/logs/login&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">login_logs</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Handle login for the Logs panel.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The rendered HTML template for the Logs login page, or a redirect to the Logs dashboard.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">password_attempt</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">password_attempt</span> <span class="o">==</span> <span class="n">PASSWORD_LOGS</span><span class="p">:</span>
+            <span class="n">session</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;logs_panel&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="n">session</span><span class="p">[</span><span class="s1">&#39;logged_in_logs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;logs_dashboard&#39;</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;login_logs.html&#39;</span><span class="p">,</span> <span class="n">error</span><span class="o">=</span><span class="s2">&quot;Nieprawidłowe hasło&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;login_logs.html&#39;</span><span class="p">,</span> <span class="n">error</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="logs_dashboard">
+<a class="viewcode-back" href="../../admin_page.html#AdminPage.admin_page.logs_dashboard">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/logs/panel&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">logs_dashboard</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Display the Logs dashboard.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The rendered HTML template for the Logs dashboard or a redirect to the index page.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="s1">&#39;logged_in_logs&#39;</span> <span class="ow">in</span> <span class="n">session</span><span class="p">:</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;logged_in_logs&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">session</span><span class="p">[</span><span class="s1">&#39;logs_panel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;logs_dashboard.html&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="get_logs">
+<a class="viewcode-back" href="../../admin_page.html#AdminPage.admin_page.get_logs">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/get_logs&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">get_logs</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieve and return the contents of the log file.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        flask.Response: A JSON response with the log file contents or an error message.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="s1">&#39;logs_panel&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">session</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Unauthorized&#39;</span><span class="p">}),</span> <span class="mi">401</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">LOG_FILE_PATH</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">logs</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;logs&#39;</span><span class="p">:</span> <span class="n">logs</span><span class="p">})</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)}),</span> <span class="mi">500</span></div>
+
+
+<div class="viewcode-block" id="logout_logs">
+<a class="viewcode-back" href="../../admin_page.html#AdminPage.admin_page.logout_logs">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/logs/logout&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">logout_logs</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Log out from the Logs panel.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        werkzeug.wrappers.Response: A redirect to the index page.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">session</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;logged_in_logs&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">))</span></div>
+
+
+<span class="c1"># ================================== ACCEPT SONGS =================================</span>
+
+<div class="viewcode-block" id="send_mail">
+<a class="viewcode-back" href="../../admin_page.html#AdminPage.admin_page.send_mail">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/songs&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">send_mail</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Display the page for sending an email regarding songs.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The rendered HTML template for the send email page.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">session</span><span class="p">[</span><span class="s1">&#39;email_sent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;send_email.html&#39;</span><span class="p">,</span> <span class="n">email_api_url</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">SONGS_URL</span><span class="si">}</span><span class="s2">/sendadminemail&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="login_songs">
+<a class="viewcode-back" href="../../admin_page.html#AdminPage.admin_page.login_songs">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/songs/login&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">login_songs</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Display the login page for the Songs panel.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The rendered HTML template for the Songs login page.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;login_songs.html&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="songs_dashboard">
+<a class="viewcode-back" href="../../admin_page.html#AdminPage.admin_page.songs_dashboard">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/songs/panel&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">songs_dashboard</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Display the Songs dashboard after successful login and API request.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The rendered HTML template for the Songs dashboard with the song data, or a redirect to the send email page.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="s1">&#39;logged_in_songs&#39;</span> <span class="ow">in</span> <span class="n">session</span><span class="p">:</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;logged_in_songs&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;adminCode&#39;</span><span class="p">:</span> <span class="n">session</span><span class="p">[</span><span class="s1">&#39;request_code&#39;</span><span class="p">]}</span>
+        <span class="n">code</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;adminCode&#39;</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
+        <span class="n">songs_data</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">SONGS_URL</span><span class="si">}</span><span class="s2">/songstocheck?adminCode=</span><span class="si">{</span><span class="n">code</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">songs_data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;songs_dashboard.html&#39;</span><span class="p">,</span> <span class="n">songs_data</span><span class="o">=</span><span class="n">songs_data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;send_mail&#39;</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="verify">
+<a class="viewcode-back" href="../../admin_page.html#AdminPage.admin_page.verify">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/songs/verify&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">verify</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Verify the admin code for accessing the Songs panel.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        werkzeug.wrappers.Response: A redirect to the Songs dashboard or an error message.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">code</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;code&#39;</span><span class="p">]</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">SONGS_URL</span><span class="si">}</span><span class="s2">/adminlogin?code=</span><span class="si">{</span><span class="n">code</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">:</span>
+            <span class="n">session</span><span class="p">[</span><span class="s1">&#39;request_code&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span>
+            <span class="n">session</span><span class="p">[</span><span class="s1">&#39;logged_in_songs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">session</span><span class="p">[</span><span class="s1">&#39;accept_songs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;songs_dashboard&#39;</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;login_songs.html&#39;</span><span class="p">,</span> <span class="n">error</span><span class="o">=</span><span class="s1">&#39;Nieprawidłowy kod&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;login_songs.html&#39;</span><span class="p">,</span> <span class="n">error</span><span class="o">=</span><span class="s1">&#39;Błąd serwera. Spróbuj ponownie później.&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="accept_song">
+<a class="viewcode-back" href="../../admin_page.html#AdminPage.admin_page.accept_song">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/acceptsong/&lt;song_id&gt;&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">accept_song</span><span class="p">(</span><span class="n">song_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Handle the acceptance of a song.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        song_id (str): The ID of the song to accept.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        flask.Response: A JSON response indicating the success or failure of the acceptance.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="s1">&#39;accept_songs&#39;</span> <span class="ow">in</span> <span class="n">session</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">SONGS_URL</span><span class="si">}</span><span class="s2">/acceptsong/</span><span class="si">{</span><span class="n">song_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="s1">&#39;Song accepted successfully.&#39;</span><span class="p">})</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Failed to accept the song.&#39;</span><span class="p">}),</span> <span class="mi">500</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)}),</span> <span class="mi">500</span>
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Unauthorized&#39;</span><span class="p">}),</span> <span class="mi">401</span></div>
+
+
+<div class="viewcode-block" id="refuse_song">
+<a class="viewcode-back" href="../../admin_page.html#AdminPage.admin_page.refuse_song">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/refusesong/&lt;song_id&gt;&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">refuse_song</span><span class="p">(</span><span class="n">song_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Handle the refusal of a song.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        song_id (str): The ID of the song to refuse.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        flask.Response: A JSON response indicating the success or failure of the refusal.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="s1">&#39;accept_songs&#39;</span> <span class="ow">in</span> <span class="n">session</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">SONGS_URL</span><span class="si">}</span><span class="s2">/refusesong/</span><span class="si">{</span><span class="n">song_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="s1">&#39;Song refused successfully.&#39;</span><span class="p">})</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Failed to refuse the song.&#39;</span><span class="p">}),</span> <span class="mi">500</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)}),</span> <span class="mi">500</span>
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Unauthorized&#39;</span><span class="p">}),</span> <span class="mi">401</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">SchoolRadioZSZ</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../admin_page.html">Admin Page</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Jakub Michalski & Mateusz Snela.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>lyrics_google &#8212; SchoolRadioZSZ  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=12dfc556" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for lyrics_google</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Get Lyrics from Google using Playwright and Scrapers</span>
+
+<span class="sd">This module provides a class `GetLyricsFromGoogle` to fetch lyrics from various lyrics websites via Google search.</span>
+<span class="sd">It includes functionalities to:</span>
+<span class="sd">- Perform Google search using Playwright.</span>
+<span class="sd">- Extract and process lyrics from specific websites using predefined scrapers.</span>
+
+<span class="sd">The class supports multiple lyrics websites and handles timeouts and errors gracefully.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">modules.lyrics_scraper</span> <span class="kn">import</span> <span class="n">BaseLyricsScraper</span><span class="p">,</span> <span class="n">Tekstowo</span><span class="p">,</span> <span class="n">AZLyrics</span><span class="p">,</span> <span class="n">Teksciory</span><span class="p">,</span> <span class="n">Groove</span>
+<span class="kn">from</span> <span class="nn">playwright.async_api</span> <span class="kn">import</span> <span class="n">async_playwright</span><span class="p">,</span> <span class="ne">TimeoutError</span> <span class="k">as</span> <span class="n">PlaywrightTimeoutError</span>
+<span class="kn">import</span> <span class="nn">aiohttp</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;Google&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="GetLyricsFromGoogle">
+<a class="viewcode-back" href="../modules/lyrics_google.html#lyrics_google.GetLyricsFromGoogle">[docs]</a>
+<span class="k">class</span> <span class="nc">GetLyricsFromGoogle</span><span class="p">:</span>
+    <span class="n">SCRAPER_MAP</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Type</span><span class="p">[</span><span class="n">BaseLyricsScraper</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;tekstowo.pl&quot;</span><span class="p">:</span> <span class="n">Tekstowo</span><span class="p">,</span>
+        <span class="s2">&quot;groove.pl&quot;</span><span class="p">:</span> <span class="n">Groove</span><span class="p">,</span>
+        <span class="s2">&quot;teksciory.interia.pl&quot;</span><span class="p">:</span> <span class="n">Teksciory</span><span class="p">,</span>
+        <span class="s2">&quot;azlyrics.com&quot;</span><span class="p">:</span> <span class="n">AZLyrics</span>
+    <span class="p">}</span>
+
+<div class="viewcode-block" id="GetLyricsFromGoogle.search_lyrics">
+<a class="viewcode-back" href="../modules/lyrics_google.html#lyrics_google.GetLyricsFromGoogle.search_lyrics">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">search_lyrics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fetches lyrics for a given song title by querying Google and scraping specific websites.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">        title (str): The title of the song to fetch lyrics for.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">        Optional[str]: The lyrics if found, otherwise None.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">async</span> <span class="k">with</span> <span class="n">async_playwright</span><span class="p">()</span> <span class="k">as</span> <span class="n">p</span><span class="p">:</span>
+            <span class="n">browser</span> <span class="o">=</span> <span class="k">await</span> <span class="n">p</span><span class="o">.</span><span class="n">chromium</span><span class="o">.</span><span class="n">launch</span><span class="p">(</span><span class="n">headless</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">page</span> <span class="o">=</span> <span class="k">await</span> <span class="n">browser</span><span class="o">.</span><span class="n">new_page</span><span class="p">()</span>
+                <span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">goto</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;https://www.google.pl/search?q=</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2"> lyrics&quot;</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;%20&quot;</span><span class="p">),</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+                <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">page</span><span class="o">.</span><span class="n">content</span><span class="p">()</span>
+                <span class="n">links</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_links</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+                <span class="n">lyrics</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_links</span><span class="p">(</span><span class="n">links</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>  <span class="c1"># Process only first 5 links</span>
+                <span class="k">if</span> <span class="n">lyrics</span><span class="p">:</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Lyrics retrieved from external source - Google&quot;</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="n">lyrics</span>
+
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No lyrics found for </span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="kc">None</span>
+
+            <span class="k">except</span> <span class="n">PlaywrightTimeoutError</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Timeout error while searching for lyrics of &#39;</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="kc">None</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;An unexpected error occurred while searching for lyrics of &#39;</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="kc">None</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">browser</span><span class="p">:</span>
+                    <span class="k">await</span> <span class="n">browser</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_extract_links</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Extracts relevant links from the Google search results.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">        response (str): The HTML content of the Google search results page.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">        List[str]: A list of extracted links.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="s1">&#39;href&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">href</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">domain</span> <span class="ow">in</span> <span class="n">a</span><span class="p">[</span><span class="s1">&#39;href&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">domain</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">SCRAPER_MAP</span><span class="o">.</span><span class="n">keys</span><span class="p">())]</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">_process_links</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">links</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Processes multiple links to extract lyrics.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">        links (List[str]): A list of URLs to be processed.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">        Optional[str]: The extracted lyrics if found, otherwise None.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">tasks</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_process_link</span><span class="p">(</span><span class="n">link</span><span class="p">)</span> <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">links</span><span class="p">]</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="o">*</span><span class="n">tasks</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">next</span><span class="p">((</span><span class="n">lyrics</span> <span class="k">for</span> <span class="n">lyrics</span> <span class="ow">in</span> <span class="n">results</span> <span class="k">if</span> <span class="n">lyrics</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">_process_link</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">link</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Processes a single link to extract lyrics using the appropriate scraper.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">        link (str): The URL to be processed.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">        Optional[str]: The extracted lyrics if found, otherwise None.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">domain</span><span class="p">,</span> <span class="n">scraper_class</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">SCRAPER_MAP</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">domain</span> <span class="ow">in</span> <span class="n">link</span><span class="p">:</span>
+                <span class="k">async</span> <span class="k">with</span> <span class="n">scraper_class</span><span class="p">()</span> <span class="k">as</span> <span class="n">scraper</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">wait_for</span><span class="p">(</span><span class="n">scraper</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">link</span><span class="p">),</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> 
+                        <span class="n">lyrics</span> <span class="o">=</span> <span class="k">await</span> <span class="n">scraper</span><span class="o">.</span><span class="n">get_lyrics</span><span class="p">()</span>
+                        <span class="k">if</span> <span class="n">lyrics</span><span class="p">:</span>
+                            <span class="k">return</span> <span class="n">lyrics</span>
+                    <span class="k">except</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">TimeoutError</span><span class="p">:</span>
+                        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Timeout while scraping lyrics from </span><span class="si">{</span><span class="n">link</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="n">aiohttp</span><span class="o">.</span><span class="n">ClientError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error scraping lyrics from </span><span class="si">{</span><span class="n">link</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">SchoolRadioZSZ</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../admin_page.html">Admin Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../koyeb_api.html">Koyeb API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sentiment_analysis.html">Sentiment Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">Modules</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Jakub Michalski & Mateusz Snela.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

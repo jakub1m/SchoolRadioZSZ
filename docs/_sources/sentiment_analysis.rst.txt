@@ -1,0 +1,7 @@
+Sentiment Analysis
+==================
+
+.. automodule:: app
+   :members:
+   :undoc-members:
+   :show-inheritance:

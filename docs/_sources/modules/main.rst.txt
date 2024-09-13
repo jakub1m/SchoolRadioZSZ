@@ -1,0 +1,7 @@
+Main
+====
+
+.. automodule:: main_module
+   :members:
+   :undoc-members:
+   :show-inheritance:

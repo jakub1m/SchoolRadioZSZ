@@ -1,0 +1,15 @@
+Modules
+=======
+
+.. toctree::
+   :maxdepth: 4
+
+   modules/logging_config
+   modules/lyrics_google
+   modules/lyrics_httpx
+   modules/lyrics_scraper
+   modules/lyrics_yahoo
+   modules/main
+   modules/text_analysis
+   modules/youtube
+

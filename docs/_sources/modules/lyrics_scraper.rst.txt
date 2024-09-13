@@ -1,0 +1,7 @@
+Lyrics Scraper
+==============
+
+.. automodule:: lyrics_scraper
+   :members:
+   :undoc-members:
+   :show-inheritance:

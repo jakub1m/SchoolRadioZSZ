@@ -1,0 +1,7 @@
+Admin Page
+==========
+
+.. automodule:: admin_page
+   :members:
+   :undoc-members:
+   :show-inheritance:
